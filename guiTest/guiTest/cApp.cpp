@@ -15,5 +15,7 @@ bool cApp::OnInit()
 {
 	m_frame1 = new cMain();
 	m_frame1->Show();
+	//m_frame2 = new Vaccine();
+	//m_frame2->Show();
 	return true;
 }
