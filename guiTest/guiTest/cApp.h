@@ -11,7 +11,5 @@ public:
 	virtual bool OnInit();
 private:
 	cMain* m_frame1 = nullptr;
-	//Vaccine* m_frame2 = nullptr;
 };
-
 

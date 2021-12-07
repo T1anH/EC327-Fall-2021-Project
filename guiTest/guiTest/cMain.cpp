@@ -2,14 +2,20 @@
 #include <fstream>
 #include <iostream>
 wxBEGIN_EVENT_TABLE(cMain, wxFrame)
-
+EVT_MENU(10006, cMain::OnMenu1)
+EVT_MENU(10007, cMain::OnMenu2)
+EVT_MENU(10008, cMain::OnMenu3)
+EVT_MENU(10009, cMain::OnMenu4)
 EVT_BUTTON(10001, OnYesButtonClicked)
 EVT_BUTTON(10002, OnNoButtonClicked)
 EVT_BUTTON(10003, OnSaveButtonClicked)
 EVT_BUTTON(10004, OnEnterButtonClicked)
+EVT_BUTTON(10005, OnScheduleButtonClicked)
 wxEND_EVENT_TABLE()
+bool cond;
 
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "TestGUI - EC327", wxPoint(30, 30), wxSize(800, 600))
+//cMain::cMain() : wxMDIParentFrame(nullptr, wxID_ANY, "TestGUI - EC327", wxPoint(30, 30), wxSize(800, 600))
 {
 	m_btn1 = new wxButton(this, 10001, "Yes", wxPoint(200, 300), wxSize(50, 20));
 	m_btn2 = new wxButton(this, 10002, "No", wxPoint(400, 300), wxSize(50, 20));
@@ -19,14 +25,59 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "TestGUI - EC327", wxPoint(30, 30), 
 	m_txt2 = new wxTextCtrl(this, wxID_ANY, "Enter symtoms:", wxPoint(100, 475), wxSize(100, 30));
 	m_txt1 = new wxTextCtrl(this, wxID_ANY, "", wxPoint(200, 475), wxSize(150, 50));
 	m_btn4 = new wxButton(this, 10004, "Enter", wxPoint(375, 475), wxSize(150, 50));
-	m_text1 = new wxStaticText(this, wxID_ANY, "Please schdule a Covid vaccine booster shot if You haven't.", wxPoint(25, 10), wxSize(500, 15));
-	
+	m_text1 = new wxStaticText(this, wxID_ANY, "Please schdule a Covid vaccine booster shot if You haven't.", wxPoint(25, 10), wxSize(400, 15));
+	m_btn5 = new wxButton(this, 10005, "Schdule Now", wxPoint(450, 10), wxSize(100, 15));
+	m_text1->SetBackgroundColour(wxColor(255, 00, 00));
+	m_MenuBar = new wxMenuBar();
+	this->SetMenuBar(m_MenuBar);
+
+	wxMenu* menuFile = new wxMenu();
+	menuFile->Append(10006, "My Info");
+	menuFile->Append(10007, "My Apointment");
+	menuFile->Append(10008, "My Doctor");
+	menuFile->Append(10009, "Quit");
+
+	m_MenuBar->Append(menuFile, "My Guides");
 }
+
+void cMain::OnMenu1(wxCommandEvent& evt)
+{
+	//cEditorFrame* f = new cEditorFrame(this, "Test");
+	//f->Show();
+	//evt.Skip();
+	cMain* m_frame2 = nullptr;
+	m_frame2 = new cMain;
+	m_frame2->Show();
+	evt.Skip();
+}
+
+void cMain::OnMenu2(wxCommandEvent& evt)
+{
+}
+
+void cMain::OnMenu3(wxCommandEvent& evt)
+{
+}
+
+void cMain::OnMenu4(wxCommandEvent& evt)
+{
+	Close();
+	evt.Skip();
+}
+
 cMain::~cMain()
 {
 
 }
 
+void cMain::OnScheduleButtonClicked(wxCommandEvent& evt)
+{
+	Close();
+	cMain* m_frame2 = nullptr;
+	m_frame2 = new cMain;
+	m_frame2->Show();
+	evt.Skip();
+}
 void cMain::OnYesButtonClicked(wxCommandEvent& evt)
 {
 	has_COVID = true;
